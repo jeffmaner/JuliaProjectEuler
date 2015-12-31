@@ -1,3 +1,5 @@
+module Problem02
+
 fibonaccis = [n=>n for n in 1:2]
 
 function fibonacci(n)
@@ -21,3 +23,5 @@ end
 evenFibs = filter(iseven, values(fibonaccis))
 
 problem02 = sum(evenFibs)
+
+end

@@ -1,3 +1,5 @@
+module Problem05
+
 function smallestMultiple(r::Range)
 	divisibleByAll(n) = all([n%m ≡ 0 for m in r])
 
@@ -13,3 +15,5 @@ problem05 = smallestMultiple(1:20)
 
 # Lmao!
 problem05′ = lcm(1:20)
+
+end

@@ -1,3 +1,5 @@
+module Problem04
+
 isPalindrome(s) = s == reverse(s)
 
 # I couldn't get this to work.
@@ -11,3 +13,5 @@ end
 palindromes = filter(isPalindrome, products)
 
 problem04 = maximum(map(s -> parse(Int,s), palindromes))
+
+end

@@ -1,3 +1,5 @@
+module Problem07
+
 function ithprime(i::Int64)
 	primesfound::Int16=0
 
@@ -13,3 +15,5 @@ end
 problem07 = ithprime(10_001)
 
 problem07′ = first(drop(filter(isprime, countfrom(1,1)), 10_000))
+
+end
