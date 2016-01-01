@@ -24,4 +24,8 @@ evenFibs = filter(iseven, values(fibonaccis))
 
 problem02 = sum(evenFibs)
 
+# From http://rosettacode.org/wiki/Fibonacci_sequence#Julia:
+# Matrix form:
+fib(n) = ([1 1 ; 1 0]^n)[1,2]
+
 end
