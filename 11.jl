@@ -25,27 +25,51 @@ input = """
 
 numbergrid′ = reshape(map(parseint, split(input)), 20, 20)
 numbergrid  = transpose(numbergrid′)
+numbergridd = rotr90(numbergrid)
 
 function windowed(series, windowsize::Integer)
 	windows = []
-	for x in 1:length(series)-windowsize
+	for x in 1:length(series)-windowsize+1
 		push!(windows, series[x:x+windowsize-1])
 	end
 
 	windows
 end
 
-sums = []
-for r in 1:size(numbergrid)[1]
-  push!(sums, windowed(collect(numbergrid[r,1:end]),4))
-end
-sums
+function makeProductsOfWindows(source, windowsize)
+  windows = []
 
-sums′ = []
-for r in 1:size(numbergrid′)[1]
-  push!(sums′, windowed(collect(numbergrid′[r,1:end]),4))
+  for r in 1:size(source)[1]
+    xs = map(prod, windowed(source[r,1:end],windowsize))
+    for x in 1:length(xs)
+      push!(windows, xs[x])
+    end
+  end
+
+  windows
 end
 
-diag(numbergrid,1)
+function makeProductsOfWindowsFromDiagonals(source, destination, windowsize)
+  n = size(source)[1]
+  for d in -n:n
+    xs = map(prod, windowed(diag(source,d),windowsize))
+    for x in 1:length(xs)
+      push!(destination, xs[x])
+    end
+  end
+end
+
+products  = makeProductsOfWindows(numbergrid , 4)
+products′ = makeProductsOfWindows(numbergrid′, 4)
+productsd = makeProductsOfWindows(numbergridd, 4)
+
+makeProductsOfWindowsFromDiagonals(numbergrid , products , 4)
+makeProductsOfWindowsFromDiagonals(numbergrid′, products′, 4)
+makeProductsOfWindowsFromDiagonals(numbergridd, productsd, 4)
+
+x = max(maximum(products), maximum(products′))
+y = maximum(productsd)
+
+problem11 = max(x,y)
 
 end
